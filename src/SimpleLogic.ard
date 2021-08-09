@@ -1,0 +1,34 @@
+\data Bool
+  | true
+  | false
+
+\func if (s : Bool) (t e : Nat) : Nat \elim s
+  | true => t
+  | false => e
+
+\func not (b : Bool) : Bool \elim b
+  | true => false
+  | false => true
+
+\func \infixl 8 && (a b : Bool) : Bool \elim a
+  | true => b
+  | _ => false
+
+\func \infixl 7 || (a b : Bool) : Bool \elim a
+  | true => true
+  | false => b
+
+\func \infixl 7 xor (a b : Bool) : Bool \elim a
+  | true => not b
+  | false => b
+
+\func \infixl 6 --> (a b : Bool) : Bool => \case a, b \with {
+  | true, false => false
+  | _, _ => true
+}
+
+\func \infixl 5 == (a b : Bool) : Bool => \case a, b \with {
+  | true, true => true
+  | false, false => true
+  | _, _ => false
+}
