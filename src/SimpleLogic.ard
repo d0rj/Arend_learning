@@ -22,13 +22,11 @@
   | true => not b
   | false => b
 
-\func \infixl 6 --> (a b : Bool) : Bool => \case a, b \with {
+\func \infixl 6 --> (a b : Bool) : Bool \elim a, b
   | true, false => false
   | _, _ => true
-}
 
-\func \infixl 5 == (a b : Bool) : Bool => \case a, b \with {
+\func \infixl 5 == (a b : Bool) : Bool \elim a, b
   | true, true => true
   | false, false => true
   | _, _ => false
-}
