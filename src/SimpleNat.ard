@@ -1,3 +1,46 @@
+\import SimpleLogic
+
 \data Nat
   | zero
   | suc Nat
+
+\func \infixl 5 < (a b : Nat) : Bool \elim a, b
+  | suc a, suc b => a < b
+  | zero, zero => false
+  | zero, _ => true
+  | _, zero => false
+
+\func \infixl 5 == (a b : Nat) : Bool \elim a, b
+  | suc a, suc b => a == b
+  | zero, zero => true
+  | _, _ => false
+
+\func \infixl 5 != (a b : Nat) : Bool => not (a == b)
+\func \infixl 5 > (a b : Nat) : Bool => not ((a < b) && (a == b))
+\func \infixl 5 <= (a b : Nat) : Bool => (a < b) || (a == b)
+\func \infixl 5 >= (a b : Nat) : Bool => (a > b) || (a == b)
+
+\func prev (n : Nat) : Nat \elim n
+  | zero => zero
+  | suc n => n
+
+\func \infixl 6 + (a b : Nat) : Nat \elim b
+  | zero => a
+  | suc b => suc (a + b)
+
+\func \infixl 6 - (a b : Nat) : Nat \elim a, b
+  | zero, _ => zero
+  | a, zero => a
+  | suc a, suc b => a - b
+
+\func \infixl 7 * (a b : Nat) : Nat \elim b
+  | zero => zero
+  | suc b => a * b + a
+
+\func \infixl 8 ^ (a b : Nat) : Nat \elim b
+  | zero => suc zero
+  | suc b => a ^ b * a
+
+\func factorial (n : Nat) : Nat \elim n
+  | zero => suc zero
+  | suc n => n * (suc n)
