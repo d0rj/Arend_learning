@@ -4,21 +4,21 @@
   | zero
   | suc Nat
 
-\func \infixl 5 < (a b : Nat) : Bool \elim a, b
+\func \infixl 5 < (a b : Nat) : _Bool \elim a, b
   | suc a, suc b => a < b
   | zero, zero => false
   | zero, _ => true
   | _, zero => false
 
-\func \infixl 5 == (a b : Nat) : Bool \elim a, b
+\func \infixl 5 == (a b : Nat) : _Bool \elim a, b
   | suc a, suc b => a == b
   | zero, zero => true
   | _, _ => false
 
-\func \infixl 5 != (a b : Nat) : Bool => not (a == b)
-\func \infixl 5 > (a b : Nat) : Bool => not ((a < b) && (a == b))
-\func \infixl 5 <= (a b : Nat) : Bool => (a < b) || (a == b)
-\func \infixl 5 >= (a b : Nat) : Bool => (a > b) || (a == b)
+\func \infixl 5 != (a b : Nat) : _Bool => _Bool.not (a == b)
+\func \infixl 5 > (a b : Nat) : _Bool => _Bool.not ((a < b) _Bool.&& (a == b))
+\func \infixl 5 <= (a b : Nat) : _Bool => (a < b) _Bool.|| (a == b)
+\func \infixl 5 >= (a b : Nat) : _Bool => (a > b) _Bool.|| (a == b)
 
 \func prev (n : Nat) : Nat \elim n
   | zero => zero
