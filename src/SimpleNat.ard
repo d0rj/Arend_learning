@@ -1,4 +1,5 @@
 \import SimpleLogic
+\open _Bool
 
 \data Nat
   | zero
@@ -15,10 +16,10 @@
   | zero, zero => true
   | _, _ => false
 
-\func \infixl 5 != (a b : Nat) : _Bool => _Bool.not (a == b)
-\func \infixl 5 > (a b : Nat) : _Bool => _Bool.not ((a < b) _Bool.&& (a == b))
-\func \infixl 5 <= (a b : Nat) : _Bool => (a < b) _Bool.|| (a == b)
-\func \infixl 5 >= (a b : Nat) : _Bool => (a > b) _Bool.|| (a == b)
+\func \infixl 5 != (a b : Nat) : _Bool => not (a == b)
+\func \infixl 5 > (a b : Nat) : _Bool => not ((a < b) && (a == b))
+\func \infixl 5 <= (a b : Nat) : _Bool => (a < b) || (a == b)
+\func \infixl 5 >= (a b : Nat) : _Bool => (a > b) || (a == b)
 
 \func prev (n : Nat) : Nat \elim n
   | zero => zero
@@ -48,3 +49,17 @@
 \func factorial (n : Nat) : Nat \elim n
   | zero => suc zero
   | suc n => n * (suc n)
+
+\func \infixl 7 div (a b : Nat) => div' a a b
+  \where
+    \func div' (s a b : Nat) : Nat \elim s
+      | zero => zero
+      | suc s => if (a < b) zero (suc (div' s (a - b) b))
+
+\func \infixl 7 mod (a b : Nat) => a - (b * (a `div` b))
+
+\func gcd (a b : Nat) => gcd' a a b
+  \where
+    \func gcd' (s a b : Nat) : Nat \elim s
+      | zero => zero
+      | suc s => if (b == zero) a (gcd' s b (a `mod` b))
