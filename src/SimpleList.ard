@@ -1,0 +1,20 @@
+\data List {A : \Type}
+  | nil
+  | cons A (List {A})
+
+\func emptyList {A : \Type} => nil {A}
+
+\func \infixl 6 ++ {A : \Type} (xs ys : List {A}) : List {A} \elim xs
+  | nil => ys
+  | cons x xs => cons x (xs ++ ys)
+
+\func \infixl 6 map {A B : \Type} (xs : List {A}) (f : A -> B) : List {B} \elim xs
+  | nil => nil
+  | cons x xs => cons (f x) (xs `map` f)
+
+\func flatten {A : \Type} (xss : List {List {A}}) : List {A} \elim xss
+  | nil => nil
+  | cons xs xss => xs ++ (flatten xss)
+
+\func \infixl 6 flatMap {A B : \Type} (xss : List {List {A}}) (f : A -> B) : List {B} =>
+  (flatten xss) `map` f
