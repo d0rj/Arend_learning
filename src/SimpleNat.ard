@@ -33,6 +33,10 @@
   | a, zero => a
   | suc a, suc b => a - b
 
+\lemma -same=zero (n : Nat) : n - n = zero \elim n
+  | zero => idp
+  | suc n => -same=zero n
+
 \func \infixl 7 * (a b : Nat) : Nat \elim b
   | zero => zero
   | suc b => a * b + a
