@@ -2,7 +2,7 @@
   | true
   | false
 
-\func if (s : Bool) (t e : Nat) : Nat \elim s
+\func if {A : \Type} (s : Bool) (t e : A) : A \elim s
   | true => t
   | false => e
 
