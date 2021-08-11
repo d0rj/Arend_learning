@@ -1,4 +1,4 @@
-\import SimpleLogic
+\import Logic
 \open _Bool
 
 \data Nat

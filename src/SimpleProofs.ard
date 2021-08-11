@@ -1,28 +1,28 @@
 
-{- P -> Q -> P -}
+-- P -> Q -> P
 \func a {P Q : \Type} (x : P) (y : Q) : P => x
 
-{- (Q -> S) -> (P -> Q) -> P -> S -}
+-- (Q -> S) -> (P -> Q) -> P -> S
 \func a' {P Q S : \Type} (g : Q -> S) (f : P -> Q) (x : P) : S => g (f x)
 
-{- (P -> Q -> R) -> (P -> Q) -> P -> R -}
+-- (P -> Q -> R) -> (P -> Q) -> P -> R
 \func a'' {P Q R : \Type} (g : P -> Q -> R) (f : P -> Q) (x : P) : R => (g x) (f x)
 
-{- ((P -> Q -> R) -> P) -> (P -> R) -> R -}
-{- ??? Can't check if I got it right ??? -}
+-- ((P -> Q -> R) -> P) -> (P -> R) -> R
+-- ??? Can't check if I got it right ???
 \func a3' {P Q R : \Type} (g : (P -> Q -> R) -> P) (y : P -> Q -> R) (f : P -> R) : R => f (g y)
 
-{- P -> Q -> (P & Q) -}
+-- P -> Q -> (P & Q)
 \func &-intro {P Q : \Type} (p : P) (q : Q) : \Sigma P Q => (p, q)
 
-{- (P & Q) -> P -}
+-- (P & Q) -> P
 \func &-first {P Q : \Type} (t : \Sigma P Q) : P => t.1
 
-{- (P & Q) -> Q -}
+-- (P & Q) -> Q
 \func &-second {P Q : \Type} (t : \Sigma P Q) : Q => t.2
 
-{- ((P && Q) -> R) -> P -> Q -> R -}
+-- ((P && Q) -> R) -> P -> Q -> R
 \func b {P Q R : \Type} (f : (\Sigma P Q) -> R) (p : P) (q : Q) : R => f (p, q)
 
-{- (P -> Q -> R) -> (P && Q) -> R -}
+-- (P -> Q -> R) -> (P && Q) -> R
 \func b' {P Q R : \Type} (f : P -> Q -> R) (t : \Sigma P Q) : R => f t.1 t.2

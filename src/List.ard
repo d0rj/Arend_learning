@@ -5,7 +5,7 @@
 \func emptyList {A : \Type} => nil {A}
 
 \func \infixl 6 ++ {A : \Type} (xs ys : List {A}) : List {A} \elim xs
-  | nil => ys
+  | nil => ysg
   | cons x xs => cons x (xs ++ ys)
 
 \func \infixl 6 map {A B : \Type} (xs : List {A}) (f : A -> B) : List {B} \elim xs
